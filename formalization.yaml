@@ -1,47 +1,137 @@
-# DRAFT: check every field against github.com/PalomarRegistry/PalomarTemplate (v0.4) before submitting.
-# Fields marked TODO-DOUG need Doug's decision.
-version: "0.4"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4
+version: "v0.4"
+
 project:
-  name: "An odd solution of Znám's problem and a solution of the coprime variant of Erdős #307"
+  name: "An odd solution of Znám's problem and a solution of the coprime variant of Erdős Problem #307"
   description: >-
-    Two existence theorems, each proved by an explicit or implicit witness checked by the Lean kernel
-    (decide +kernel, standard axioms only, no native_decide).
-    (1) Erdős Problem #307, coprime variant with 1 ∉ P ∪ Q: pairwise-coprime finite P, Q with
-    (Σ_P 1/p)(Σ_Q 1/q) = 1. The statement copies google-deepmind/formal-conjectures
-    `erdos_307.variants.coprime_one_notMem` (research open, "no examples known"). The witness has 973
-    elements, given implicitly by 914 deviations and certified by a residue checker proved sound in Lean.
-    (2) A set of 24 odd integers > 1, each a proper divisor of the product of the others plus 1: an all-odd
-    solution of Znám's problem (Brenton–Hill 1988, open question).
-  authors: ["Doug Phillips"]                  # TODO-DOUG: confirm (humans only)
+    Two existence theorems on unit fractions, each checked by the Lean kernel from an explicit or implicit witness.
+    (1) The coprime variant of Erdős Problem #307 with 1 excluded: finite sets P, Q of integers greater than 1, each
+    pairwise coprime, with (Σ_{p∈P} 1/p)(Σ_{q∈Q} 1/q) = 1. The statement is formal-conjectures'
+    erdos_307.variants.coprime_one_notMem, listed there and on erdosproblems.com as having no known examples. The
+    witness has 973 elements, most too large to write down. It is encoded by 914 small "deviations" and certified by
+    a residue checker whose soundness is proved in Lean.
+    (2) An all-odd solution of Znám's problem: 24 odd integers greater than 1, each a proper divisor of the product of
+    the others plus 1. Brenton and Hill (1988) asked whether such a solution exists.
+  authors:
+    - "Doug Phillips"
   license: "Apache-2.0"
-  responsible_maintainers: ["Doug Phillips"]  # TODO-DOUG
+  responsible_maintainers:
+    - "Doug Phillips"
+
 classification:
   arxiv: ["math.NT"]
   msc2020: ["11D68", "11Y50"]
+
 sources:
-  - title: "formal-conjectures: Erdős Problem 307"
-    authors: ["The Formal Conjectures Authors"]
-    type: "other"
-    relationship: "formalizes"
-  - title: "On the Diophantine equation 1 = Σ1/nᵢ + 1/∏nᵢ and a class of homologically trivial complex surface singularities (Pacific J. Math. 133, 1988)"
-    authors: ["L. Brenton", "R. Hill"]
+  - title: "An odd solution of Znám's problem and a solution of the coprime 1-excluded variant of Erdős Problem #307, found by residue-steered implicit descent"
+    type: original-proof
+    location: "https://github.com/duggiephresh/unit-fraction-solutions"
+    relationship: other
+    note: "Both witnesses, the certificates, two independent Python verifiers and a description of the method are in this repository."
+  - title: "Erdős Problem #307"
+    contributors:
+      - name: "Paul Erdős and Ronald Graham"
+        role: "problem posers (ErGr80)"
+      - name: "Edward J. Barbeau"
+        role: "proposer of the coprime variant (Ba76)"
+      - name: "Thomas F. Bloom"
+        role: "editor of erdosproblems.com"
+    type: "web page"
+    location: "https://www.erdosproblems.com/307"
+    relationship: background
+  - title: "formal-conjectures: FormalConjectures/ErdosProblems/307.lean"
+    authors:
+      - "The Formal Conjectures Authors"
+    type: "formalization"
+    location: "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/307.lean"
+    relationship: background
+    note: "Challenge theorem 1 restates erdos_307.variants.coprime_one_notMem field for field."
+    license: "Apache-2.0"
+  - title: "On the Diophantine equation 1 = Σ1/nᵢ + 1/∏nᵢ and a class of homologically trivial complex surface singularities"
+    authors:
+      - "Lawrence Brenton"
+      - "Richard Hill"
     type: "article"
-    relationship: "background"
-  - title: "unit-fraction-solutions (certificates, verifiers, method)"
-    authors: ["Doug Phillips"]
-    type: "other"
-    relationship: "background"                # TODO-DOUG: check the allowed values
-    url: "https://github.com/duggiephresh/unit-fraction-solutions"
-author_endorsement: "not-contacted"           # TODO-DOUG: check the allowed values
+    location: "Pacific Journal of Mathematics 133 (1988), 41–67"
+    relationship: background
+    note: "Source of the 'sequence of remainders' step that the method iterates, and of the open question whether Znám's problem has an all-odd solution."
+  - title: "On recursive solutions of a unit fraction equation"
+    authors:
+      - "Lawrence Brenton"
+      - "Ana Bruner"
+    type: "article"
+    location: "Journal of the Australian Mathematical Society 57 (1994), 341–356"
+    relationship: background
+    note: "Sylvester chains tracked modulo primes: an earlier instance of certifying unwritten solutions by residues."
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Both Challenge statements are proved in full, with no weakened hypotheses. Theorem 1 is the exact
+    formal-conjectures statement of the coprime 1-excluded variant. Theorem 2 asserts at least two odd elements;
+    the witness has 24. The prime version of Erdős #307 and odd primary pseudoperfect numbers (the prime case of
+    Znám's problem) are not addressed.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
 automation:
   methods:
-    - method: "agent"
+    - method: agent
       models: ["claude-opus-5-5"]
       framework: "Claude Code"
-      tool_setup: "Lean 4 v4.36.0 + Mathlib v4.36.0; Python (gmpy2) verifiers"
-      notes: "Forcing reduction, closing lemma, implicit-chain step lemma, residue checker (stepCheck) and its soundness proof, certificate encoding, Znám kernel check, independent verifier."
-    - method: "agent"
-      models: ["claude-opus-5-5"]             # TODO-DOUG: confirm the model the second session ran on
-      framework: "Claude Code (second session)"
-      tool_setup: "C beam search, Python verifier"
-      notes: "Residue-only beam descent that found both witnesses; second independent verifier."
+      tool_setup: >-
+        Lean 4 v4.36.0 with Mathlib v4.36.0 (lake build, decide +kernel, #print axioms); Python with gmpy2 for the
+        verifiers; C for the beam searches. The agent wrote the Lean library (forcing reduction, closing lemma,
+        implicit-chain step lemma, residue checker and its soundness proof), the certificate encoding, the Znám
+        kernel check and one of the two independent verifiers.
+      cost:
+        wall_time: "about 3 days of agent sessions"
+        spend_usd: "subscription-based"
+        hardware: "local machine (Apple silicon laptop)"
+      prompting_notes: "The human set goals and routes; the agents proposed, ran and checked the mathematics."
+    - method: agent
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code (separate session)"
+      tool_setup: "C residue-only beam search that found both witnesses; a second independent Python verifier."
+      cost:
+        wall_time: "hours"
+        spend_usd: "subscription-based"
+        hardware: "local machine (Apple silicon laptop)"
+      prompting_notes: "Written briefs from the main session."
+  spend_usd: "subscription-based"
+  notes: >-
+    Directed by Doug Phillips. Claude agents did the search, the formalization and the independent verification.
+    Earlier rounds of the surrounding project, not part of this submission, also used Gemini (Google).
+
+fidelity:
+  divergences: >-
+    None for Theorem 1. Theorem 2 encodes Znám's proper condition as x ∣ (∏_{y≠x} y) + 1 and x ≠ (∏_{y≠x} y) + 1
+    over a Finset of naturals, which is the standard statement restricted to odd elements greater than 1.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements audited by hand against formal-conjectures and the Brenton–Hill definition. Witnesses re-checked by
+    two independently written verifiers and, for Znám, by direct big-integer arithmetic in Python and PARI/GP. No
+    external mathematical review yet.
+
+alignment:
+  namespace: "UnitFractions"
+  statements:
+    - source: "formal-conjectures erdos_307.variants.coprime_one_notMem"
+      lean: "UnitFractions.erdos307_coprime_one_notMem"
+      module: "Challenge"
+      status: proved
+      note: "Same hypotheses and conclusion as the formal-conjectures statement."
+    - source: "Brenton–Hill (1988): does Znám's problem have an all-odd solution?"
+      lean: "UnitFractions.odd_znam"
+      module: "Challenge"
+      status: proved
+      note: "Existence of a set of at least two odd integers greater than 1 satisfying Znám's proper condition."
+
+acknowledgements: "Mathlib; the formal-conjectures project; erdosproblems.com; Stijn Cambie's examples of the 1-allowed variant; V. Bonfioli's bounds for the coprime variant."
