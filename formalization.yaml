@@ -1,0 +1,47 @@
+# DRAFT: check every field against github.com/PalomarRegistry/PalomarTemplate (v0.4) before submitting.
+# Fields marked TODO-DOUG need Doug's decision.
+version: "0.4"
+project:
+  name: "An odd solution of Znám's problem and a solution of the coprime variant of Erdős #307"
+  description: >-
+    Two existence theorems, each proved by an explicit or implicit witness checked by the Lean kernel
+    (decide +kernel, standard axioms only, no native_decide).
+    (1) Erdős Problem #307, coprime variant with 1 ∉ P ∪ Q: pairwise-coprime finite P, Q with
+    (Σ_P 1/p)(Σ_Q 1/q) = 1. The statement copies google-deepmind/formal-conjectures
+    `erdos_307.variants.coprime_one_notMem` (research open, "no examples known"). The witness has 973
+    elements, given implicitly by 914 deviations and certified by a residue checker proved sound in Lean.
+    (2) A set of 24 odd integers > 1, each a proper divisor of the product of the others plus 1: an all-odd
+    solution of Znám's problem (Brenton–Hill 1988, open question).
+  authors: ["Doug Phillips"]                  # TODO-DOUG: confirm (humans only)
+  license: "Apache-2.0"
+  responsible_maintainers: ["Doug Phillips"]  # TODO-DOUG
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11D68", "11Y50"]
+sources:
+  - title: "formal-conjectures: Erdős Problem 307"
+    authors: ["The Formal Conjectures Authors"]
+    type: "other"
+    relationship: "formalizes"
+  - title: "On the Diophantine equation 1 = Σ1/nᵢ + 1/∏nᵢ and a class of homologically trivial complex surface singularities (Pacific J. Math. 133, 1988)"
+    authors: ["L. Brenton", "R. Hill"]
+    type: "article"
+    relationship: "background"
+  - title: "unit-fraction-solutions (certificates, verifiers, method)"
+    authors: ["Doug Phillips"]
+    type: "other"
+    relationship: "background"                # TODO-DOUG: check the allowed values
+    url: "https://github.com/duggiephresh/unit-fraction-solutions"
+author_endorsement: "not-contacted"           # TODO-DOUG: check the allowed values
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: "Lean 4 v4.36.0 + Mathlib v4.36.0; Python (gmpy2) verifiers"
+      notes: "Forcing reduction, closing lemma, implicit-chain step lemma, residue checker (stepCheck) and its soundness proof, certificate encoding, Znám kernel check, independent verifier."
+    - method: "agent"
+      models: ["claude-opus-5-5"]             # TODO-DOUG: confirm the model the second session ran on
+      framework: "Claude Code (second session)"
+      tool_setup: "C beam search, Python verifier"
+      notes: "Residue-only beam descent that found both witnesses; second independent verifier."
