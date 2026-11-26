@@ -1,6 +1,10 @@
 module
 
-public import Mathlib
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Data.Rat.Defs
+public import Mathlib.Data.Nat.GCD.Basic
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.Algebra.Group.Nat.Even
 
 /-!
 # Two unit-fraction existence statements
