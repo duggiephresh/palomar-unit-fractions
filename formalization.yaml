@@ -12,7 +12,7 @@ project:
     witness has 973 elements, most too large to write down. It is encoded by 914 small "deviations" and certified by
     a residue checker whose soundness is proved in Lean.
     (2) An all-odd solution of Znám's problem: 24 odd integers greater than 1, each a proper divisor of the product of
-    the others plus 1. Brenton and Hill (1988) asked whether such a solution exists.
+    the others plus 1. No all-odd solution was known (Brenton and Joo, 1995).
   authors:
     - "Doug Phillips"
   license: "Apache-2.0"
@@ -55,7 +55,15 @@ sources:
     type: "article"
     location: "Pacific Journal of Mathematics 133 (1988), 41–67"
     relationship: background
-    note: "Source of the 'sequence of remainders' step that the method iterates, and of the open question whether Znám's problem has an all-odd solution."
+    note: "Source of the 'sequence of remainders' step that the method iterates, and of the bound that an all-odd solution needs at least 12 terms."
+  - title: "On the system of congruences ∏_{j≠i} nⱼ ≡ 1 mod nᵢ"
+    authors:
+      - "Lawrence Brenton"
+      - "Mi-Kyung Joo"
+    type: "article"
+    location: "Fibonacci Quarterly 33 (1995)"
+    relationship: background
+    note: "States that no solution with all terms odd is known, for either the proper or the improper system."
   - title: "On recursive solutions of a unit fraction equation"
     authors:
       - "Lawrence Brenton"
@@ -128,7 +136,7 @@ alignment:
       module: "Challenge"
       status: proved
       note: "Same hypotheses and conclusion as the formal-conjectures statement."
-    - source: "Brenton–Hill (1988): does Znám's problem have an all-odd solution?"
+    - source: "Znám's problem with all terms odd (no example known per Brenton–Joo 1995)"
       lean: "UnitFractions.odd_znam"
       module: "Challenge"
       status: proved

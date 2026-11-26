@@ -17,7 +17,8 @@ public import Mathlib.Algebra.Group.Nat.Even
 
 2. **An odd solution of Znám's problem.** There is a set `S` of at least two odd integers `> 1` such
    that each `x ∈ S` is a proper divisor of `(∏_{y ∈ S, y ≠ x} y) + 1`: it divides it and is not equal
-   to it. Brenton–Hill (1988) asked whether such an all-odd solution exists.
+   to it. No all-odd solution was known (Brenton–Joo 1995; Brenton–Hill 1988 showed one needs at least
+   12 terms).
 -/
 
 public section
