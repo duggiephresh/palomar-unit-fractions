@@ -10,4 +10,4 @@ Build: `lake exe cache get && lake build` (Lean 4 v4.36.0, Mathlib v4.36.0).
 
 Submission form: https://submit.palomar-registry.org/
 
-Written with AI agents (Claude, Anthropic) under human direction; see `formalization.yaml`.
+**How this was produced.** The results, the search programs and this Lean formalization were produced by AI agents (Claude, Anthropic) in a project run by Doug Phillips. He set the goals, directed the work and is responsible for this entry, but he did not independently verify the mathematics. Palomar lists only humans as authors, following the Leiden Declaration; the AI's contribution is recorded in `formalization.yaml` (`automation`). Correctness of the stated theorems rests on Lean kernel checks, re-verified by Palomar. No human mathematician has yet reviewed the work, and expert review is welcome.

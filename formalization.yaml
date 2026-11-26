@@ -13,6 +13,10 @@ project:
     a residue checker whose soundness is proved in Lean.
     (2) An all-odd solution of Znám's problem: 24 odd integers greater than 1, each a proper divisor of the product of
     the others plus 1. No all-odd solution was known (Brenton and Joo, 1995).
+    Production: the results, the search programs and this Lean formalization were produced by AI agents (Claude,
+    Anthropic) in a project run by Doug Phillips. He set the goals, directed the work and is responsible for this
+    entry, but he did not independently verify the mathematics. Correctness of the stated theorems rests on the
+    kernel checks recorded here. No human mathematician has yet reviewed the work.
   authors:
     - "Doug Phillips"
   license: "Apache-2.0"
